@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores Amarillas</title>
+    <style>
+        body {
+            background-color: #fff8dc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            position: relative;
+        }
+        h1 {
+            position: absolute;
+            font-size: 50px;
+            color: black;
+            text-align: center;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>TE AMO NAVIDAD</h1>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function drawFlower(x, y) {
+            ctx.fillStyle = "yellow";
+            for (let i = 0; i < 6; i++) {
+                ctx.beginPath();
+                ctx.ellipse(x, y, 10, 20, (Math.PI / 3) * i, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.beginPath();
+            ctx.arc(x, y, 8, 0, Math.PI * 2);
+            ctx.fillStyle = "orange";
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.moveTo(x, y + 10);
+            ctx.lineTo(x, y + 40);
+            ctx.strokeStyle = "green";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+        
+        function generateFlowers() {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            drawFlower(x, y);
+            setTimeout(generateFlowers, 500);
+        }
+        
+        generateFlowers();
+    </script>
+</body>
+</html>
